@@ -15,6 +15,7 @@ class _MainState extends State<Main> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TLU Schedule',
+      debugShowCheckedModeBanner: false,
       home: Login(),
     );
   }
