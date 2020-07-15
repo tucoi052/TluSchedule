@@ -1,5 +1,5 @@
-import 'package:TluSchedule/screens/loginscreen.dart';
 import 'package:flutter/material.dart';
+import 'Screens/LoginScreen/loginscreen.dart';
 
 void main() {
   runApp(Main());
