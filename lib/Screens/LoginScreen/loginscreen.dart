@@ -1,3 +1,4 @@
+import 'Components/background.dart';
 import 'Components/body.dart';
 import 'package:flutter/material.dart';
 
@@ -12,17 +13,7 @@ class Login extends StatelessWidget {
         width: double.infinity,
         child: Stack(
           children: <Widget>[
-            Positioned(
-              top: 0,
-              child: Image.asset('assets/images/login_top.png'),
-            ),
-            Positioned(
-              bottom: 0,
-              child: Image.asset(
-                'assets/images/login_bottom.png',
-                alignment: Alignment.bottomLeft,
-              ),
-            ),
+            Background(),
             Body(size: size),
           ],
         ),

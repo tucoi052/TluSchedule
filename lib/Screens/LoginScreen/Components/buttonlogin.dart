@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:TluSchedule/Services/login.dart';
 
 class ButtonLogin extends StatelessWidget {
   const ButtonLogin({
@@ -30,7 +31,17 @@ class ButtonLogin extends StatelessWidget {
         child: FlatButton(
           padding: EdgeInsets.symmetric(vertical: 17, horizontal: 40),
           color: Colors.blueAccent,
-          onPressed: () {},
+          onPressed: () async {
+            Login login = Login(msv: user, pass: pass);
+            String statuscode = await login.getStatus();
+            if (statuscode == '1') {
+              print('Đăng nhập thành công');
+              login.getShedule();
+            } else if (statuscode == '0') {
+              print('Sai tên tài khoản mật khẩu');
+            } else
+              print('error');
+          },
           child: Text(
             'Đăng nhập',
             style: TextStyle(color: Colors.white),
