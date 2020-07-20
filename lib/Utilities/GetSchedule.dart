@@ -12,9 +12,11 @@ class GetSchedule {
       DateTime begin = new DateFormat('dd/MM/yyyy').parse(temp.dateBegin);
 
       for (int i = 0; i <= end.difference(begin).inDays; i++) {
-        if (DateTime.now() == begin.add(Duration(days: i)) &&
-            DateTime.now().weekday == int.parse(temp.weekday) - 1)
+        if (DateTime.now().toString().split(' ')[0] ==
+                begin.add(Duration(days: i)).toString().split(' ')[0] &&
+            DateTime.now().weekday == int.parse(temp.weekday) - 1) {
           scheduletoday.add(temp);
+        }
       }
     }
 
