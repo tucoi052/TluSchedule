@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Schedule {
   final String subjects;
   final String dateBegin;
@@ -24,4 +26,24 @@ class Schedule {
       room: json['Phong_hoc'],
     );
   }
+
+  static Map<String, dynamic> toMap(Schedule schedule) => {
+        'Ten_mon': schedule.subjects,
+        'Ngay_bat_dau': schedule.dateBegin,
+        'Ngay_ket_thuc': schedule.dateEnd,
+        'Tiet_hoc': schedule.time,
+        'Thu_hoc': schedule.weekday,
+        'Phong_hoc': schedule.room,
+      };
+
+  static String encodeSchedules(List<Schedule> schedules) => json.encode(
+        schedules
+            .map<Map<String, dynamic>>((schedules) => Schedule.toMap(schedules))
+            .toList(),
+      );
+
+  static List<Schedule> decodeSchedules(String schedules) =>
+      (json.decode(schedules) as List<dynamic>)
+          .map<Schedule>((item) => Schedule.fromJson(item))
+          .toList();
 }

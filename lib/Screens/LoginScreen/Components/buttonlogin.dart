@@ -1,5 +1,9 @@
+import 'package:TluSchedule/Models/Info.dart';
+import 'package:TluSchedule/Models/Schedule.dart';
+import 'package:TluSchedule/Screens/HomeScreen/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:TluSchedule/Services/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ButtonLogin extends StatelessWidget {
   const ButtonLogin({
@@ -12,6 +16,31 @@ class ButtonLogin extends StatelessWidget {
   final Size size;
   final String user;
   final String pass;
+
+  Future<bool> login(BuildContext context, String user, String pass) async {
+    Login login = Login(msv: user, pass: pass);
+    if (await login.getStatus() == '1') {
+      List<Schedule> schedules = await login.getShedule();
+      Info info = login.getInfo();
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setString(
+          'encode',
+          Schedule.encodeSchedules(schedules) +
+              'split' +
+              Info.encodeInfo(info));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(
+            schedule: schedules,
+            info: info,
+          ),
+        ),
+      );
+      return true;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +61,39 @@ class ButtonLogin extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 17, horizontal: 40),
           color: Colors.blueAccent,
           onPressed: () async {
-            Login login = Login(msv: user, pass: pass);
-            String statuscode = await login.getStatus();
-            if (statuscode == '1') {
-              print('Đăng nhập thành công');
-              login.getShedule();
-            } else if (statuscode == '0') {
-              print('Sai tên tài khoản mật khẩu');
-            } else
-              print('error');
+            if (user.isEmpty || pass.isEmpty) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Lỗi'),
+                      content: Text(
+                        'Hãy nhập đủ thông tin',
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                            onPressed: () => Navigator.pop(context, true),
+                            child: Text('OK'))
+                      ],
+                    );
+                  });
+            } else if (await login(context, user, pass) == false) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Lỗi'),
+                      content: Text(
+                        'Sai tên tài khoản mật khẩu',
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                            onPressed: () => Navigator.pop(context, true),
+                            child: Text('OK'))
+                      ],
+                    );
+                  });
+            }
           },
           child: Text(
             'Đăng nhập',

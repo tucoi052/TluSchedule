@@ -7,8 +7,7 @@ class Login {
   String msv, pass;
   Login({this.msv, this.pass});
 
-  Info _info;
-  List<Schedule> _schedule;
+  Info _info = new Info();
   Future<String> getStatus() async {
     var data = await NetWorkHelper(url: API().login(msv, pass)).getData();
     if (data != null) {
@@ -19,12 +18,15 @@ class Login {
     return '404';
   }
 
-  Future<List> getShedule() async {
+  Info getInfo() => _info;
+
+  Future<List<Schedule>> getShedule() async {
     var data = await NetWorkHelper(url: API().lichHoc(_info.msv, _info.pass))
         .getData();
     if (data != null) {
       final parsed = data.cast<Map<String, dynamic>>();
       return parsed.map<Schedule>((json) => Schedule.fromJson(json)).toList();
     }
+    return null;
   }
 }

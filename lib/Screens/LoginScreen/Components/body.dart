@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'buttonlogin.dart';
 import 'labellogin.dart';
 
-String user = '', pass;
+String user = '', pass = '';
 
 class Body extends StatelessWidget {
   Body({this.size});
-
   final Size size;
   @override
   Widget build(BuildContext context) {
