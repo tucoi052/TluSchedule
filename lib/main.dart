@@ -1,4 +1,5 @@
 import 'package:TluSchedule/Models/Schedule.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Models/Info.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'Screens/LoginScreen/loginscreen.dart';
 
 void main() {
-  runApp(Main());
+  runApp(Phoenix(child: Main()));
 }
 
 class Main extends StatefulWidget {

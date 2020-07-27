@@ -1,4 +1,5 @@
 import 'package:TluSchedule/Models/Schedule.dart';
+import 'package:TluSchedule/Utilities/GetSchedule.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -21,20 +22,21 @@ class CardSchedule extends StatelessWidget {
         shadowColor: Colors.blueGrey,
         child: InkWell(
           splashColor: Colors.blue.withAlpha(50),
-          onTap: () {
-            print(schedule.subjects);
-          },
+          onTap: () {},
           child: Container(
             width: size.width * 0.9,
             height: 90,
             child: Row(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(
-                    'Tiết: ' + schedule.time,
-                    style:
-                        TextStyle(fontSize: 16, color: Colors.blueAccent[400]),
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Container(
+                    width: size.width * 0.25,
+                    child: Text(
+                      'Tiết: ' + schedule.time,
+                      style: TextStyle(
+                          fontSize: 16, color: Colors.blueAccent[400]),
+                    ),
                   ),
                 ),
                 Column(
