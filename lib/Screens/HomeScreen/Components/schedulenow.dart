@@ -40,21 +40,23 @@ class ScheduleNow extends StatelessWidget {
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
-                Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, i) => scheduletoday.isEmpty
-                        ? Center(child: Text('Hôm nay bạn nghỉ'))
-                        : Center(
+                scheduletoday.isEmpty
+                    ? Expanded(
+                        child: Center(child: Text('Hôm nay bạn nghỉ')),
+                      )
+                    : Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, i) => Center(
                             child: CardSchedule(
                               size: size,
                               schedule: scheduletoday[i],
                             ),
                           ),
-                    itemCount: scheduletoday.isEmpty ? 1 : scheduletoday.length,
-                  ),
-                ),
+                          itemCount: scheduletoday.length,
+                        ),
+                      ),
               ],
             ),
           ),

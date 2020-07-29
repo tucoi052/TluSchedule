@@ -61,7 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
       controller: _controller,
       screens: _buildScreens(),
       items: _navBarsItems(),
-      confineInSafeArea: true,
+      confineInSafeArea: false,
+      bottomScreenMargin: 20,
       backgroundColor: Colors.white,
       handleAndroidBackButtonPress: true,
       stateManagement: true,
@@ -76,8 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       screenTransitionAnimation: ScreenTransitionAnimation(
         animateTabTransition: true,
-        curve: Curves.bounceOut,
-        duration: Duration(milliseconds: 400),
+        curve: Curves.decelerate,
+        duration: Duration(milliseconds: 300),
       ),
       navBarStyle: NavBarStyle.style9,
     );

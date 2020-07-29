@@ -32,13 +32,15 @@ class ScheduleWeek extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, i) => listdate.isEmpty
-                      ? Center(child: Text('Không có lịch học'))
-                      : Column(
+              listdate.isEmpty
+                  ? Expanded(
+                      child: Center(child: Text('Không có lịch học')),
+                    )
+                  : Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, i) => Column(
                           children: <Widget>[
                             Padding(
                               padding:
@@ -70,9 +72,9 @@ class ScheduleWeek extends StatelessWidget {
                             ),
                           ],
                         ),
-                  itemCount: listdate.isEmpty ? 1 : listdate.length,
-                ),
-              ),
+                        itemCount: listdate.length,
+                      ),
+                    ),
             ],
           ),
         ),

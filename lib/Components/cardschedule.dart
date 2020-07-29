@@ -1,5 +1,4 @@
 import 'package:TluSchedule/Models/Schedule.dart';
-import 'package:TluSchedule/Utilities/GetSchedule.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
@@ -29,9 +28,9 @@ class CardSchedule extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 15, right: 10),
                   child: Container(
-                    width: size.width * 0.25,
+                    width: size.width * 0.27,
                     child: Text(
                       'Tiết: ' + schedule.time,
                       style: TextStyle(
@@ -44,7 +43,7 @@ class CardSchedule extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      width: size.width * 0.55,
+                      width: size.width * 0.52,
                       child: AutoSizeText(
                         schedule.subjects,
                         style: TextStyle(
