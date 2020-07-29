@@ -38,29 +38,27 @@ class ScheduleWeek extends StatelessWidget {
                     )
                   : Expanded(
                       child: ListView.builder(
-                        shrinkWrap: true,
                         scrollDirection: Axis.vertical,
-                        itemBuilder: (context, i) => Column(
-                          children: <Widget>[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(
-                                'Thứ ' +
-                                    (listdate[i].weekday + 1).toString() +
-                                    ', Ngày ' +
-                                    DateFormat('dd/MM/yyyy')
-                                        .format(listdate[i])
-                                        .toString(),
-                                style: TextStyle(
-                                    color: Colors.blueGrey,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                        itemBuilder: (context, i) => Padding(
+                          padding: const EdgeInsets.only(bottom: 35),
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 5),
+                                child: Text(
+                                  'Thứ ' +
+                                      (listdate[i].weekday + 1).toString() +
+                                      ', Ngày ' +
+                                      DateFormat('dd/MM/yyyy')
+                                          .format(listdate[i])
+                                          .toString(),
+                                  style: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListView.builder(
+                              ListView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (context, j) => CardSchedule(
@@ -69,8 +67,8 @@ class ScheduleWeek extends StatelessWidget {
                                 ),
                                 itemCount: listschedule[i].length,
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         itemCount: listdate.length,
                       ),

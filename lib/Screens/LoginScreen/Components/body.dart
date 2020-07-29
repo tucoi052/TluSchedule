@@ -2,26 +2,39 @@ import 'package:flutter/material.dart';
 import 'buttonlogin.dart';
 import 'labellogin.dart';
 
-String user = '', pass = '';
-
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   Body({this.size});
   final Size size;
+
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  final _userController = TextEditingController();
+  final _passController = TextEditingController();
+  final _userFocus = FocusNode();
+  final _passFocus = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: size.height * 0.35,
-      left: size.width * 0.15,
+      top: widget.size.height * 0.35,
+      left: widget.size.width * 0.15,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           LabelLogin(),
           Container(
-            width: size.width * 0.7,
+            width: widget.size.width * 0.7,
             child: TextField(
-              onChanged: (text) {
-                user = text;
+              focusNode: _userFocus,
+              textInputAction: TextInputAction.next,
+              onSubmitted: (value) {
+                _userFocus.unfocus();
+                FocusScope.of(context).requestFocus(_passFocus);
               },
+              controller: _userController,
               obscureText: false,
               autofocus: false,
               decoration: InputDecoration(
@@ -37,11 +50,12 @@ class Body extends StatelessWidget {
             ),
           ),
           Container(
-            width: size.width * 0.7,
+            width: widget.size.width * 0.7,
             child: TextField(
-              onChanged: (text) {
-                pass = text;
-              },
+              focusNode: _passFocus,
+              textInputAction: TextInputAction.done,
+              onSubmitted: (value) {},
+              controller: _passController,
               obscureText: true,
               autofocus: false,
               decoration: InputDecoration(
@@ -56,7 +70,10 @@ class Body extends StatelessWidget {
               ),
             ),
           ),
-          ButtonLogin(size: size, user: user, pass: pass),
+          ButtonLogin(
+              size: widget.size,
+              user: _userController.text,
+              pass: _passController.text),
         ],
       ),
     );
